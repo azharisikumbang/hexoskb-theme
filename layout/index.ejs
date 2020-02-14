@@ -1,0 +1,25 @@
+<div>
+ <% page.posts.each(function(post){ %>
+     <div class="mb-5">
+         <div class="mb-8">
+          <p class="text-sm text-gray-600 flex items-center">
+          <!-- Categories here -->
+          </p>
+          <div class="text-gray-900 font-bold text-2xl mb-2">
+              <a href="<%- url_for(post.permalink) %>"><%= post.title %></a>
+          </div>
+          <div class="text-gray-700 text-base">
+              <% if(post.excerpt) { %>
+                  <p>
+                      <%- post.excerpt %>
+                  </p>
+              <% } else { %>
+                  <p>
+                      <%- word_wrap(post.excerpt, 30) %>
+                  </p>
+              <% } %>
+          </div>
+        </div>
+      </div>
+   <% }) %>
+ </div>

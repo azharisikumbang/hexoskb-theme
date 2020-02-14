@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <%- partial('_partial/header') %>
+    <body>
+        <div class="container mt-10 mx-auto">
+            <div class="flex flex-wrap mb-4">
+                <div class="w-full md:w-1/4 text-right px-5 border-r-2">
+                    <!-- Navigation  -->
+                    <nav>
+                        <ul>
+                            <% for (var i in theme.menu){ %>
+                            <li class="pb-1 text-lg">
+                              <a class="main-nav-link" href="<%- url_for(theme.menu[i]) %>"><%= i %></a>
+                            </li>
+                            <% } %>
+                          </ul>
+                    </nav>
+
+                    <!-- Footer  -->
+                    <footer class="text-gray-600 text-sm">
+                        <div class="py-4">
+                          &copy; <%= date(new Date(), 'YYYY') %> <%= config.author || config.title %><br>
+                          <%= __('prowered by') %> <a href="http://hexo.io/" target="_blank">Hexo</a>
+                        </div>
+                    </footer>
+                </div>
+                <div class="w-full md:w-3/4 px-5 text-gray-800 leading-relaxed">
+                    <%- body %>
+                </div>
+              </div>
+        </div>
+
+         <% if (config.disqus_shortname){ %>
+         <script>
+           var disqus_shortname = '<%= config.disqus_shortname %>';
+           <% if (page.permalink){ %>
+           var disqus_url = '<%= page.permalink %>';
+           <% } %>
+           (function(){
+             var dsq = document.createElement('script');
+             dsq.type = 'text/javascript';
+             dsq.async = true;
+             dsq.src = '//' + disqus_shortname + '.disqus.com/<% if (page.comments) { %>embed.js<% } else { %>count.js<% } %>';
+             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+           })();
+         </script>
+         <% } %>
+    </body>
+</html>
